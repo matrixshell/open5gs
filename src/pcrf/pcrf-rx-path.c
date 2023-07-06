@@ -198,7 +198,7 @@ static int pcrf_rx_aar_cb( struct msg **msg, struct avp *avp,
 
     if (!gx_sid) {
         ogs_error("No Gx Session");
-        goto out;
+   //     goto out;
     }
 
     ret = fd_msg_browse(qry, MSG_BRW_FIRST_CHILD, &avpch1, NULL);
@@ -336,7 +336,7 @@ static int pcrf_rx_aar_cb( struct msg **msg, struct avp *avp,
         fd_msg_browse(avpch1, MSG_BRW_NEXT, &avpch1, NULL);
     }
 
-    /* Send Re-Auth Request */
+    /* Send Re-Auth Request 
     rv = pcrf_gx_send_rar(gx_sid, sess_data->rx_sid, &rx_message);
     if (rv != OGS_OK) {
         result_code = rx_message.result_code;
@@ -346,10 +346,10 @@ static int pcrf_rx_aar_cb( struct msg **msg, struct avp *avp,
         }
     }
 
-    /* Store Gx Session-Id in this session */
+     Store Gx Session-Id in this session 
     if (!sess_data->gx_sid)
         sess_data->gx_sid = (os0_t)ogs_strdup((char *)gx_sid);
-    ogs_assert(sess_data->gx_sid);
+    ogs_assert(sess_data->gx_sid);*/
 
     /* Set IP-Can-Type */
     ret = fd_msg_avp_new(ogs_diam_rx_ip_can_type, 0, &avp);
@@ -667,7 +667,7 @@ static int pcrf_rx_str_cb( struct msg **msg, struct avp *avp,
         goto out;
     }
     ogs_assert(sess_data->rx_sid);
-    ogs_assert(sess_data->gx_sid);
+//    ogs_assert(sess_data->gx_sid);
 
     /* Get Termination-Cause */
     ret = fd_msg_search_avp(qry, ogs_diam_termination_cause, &avp);
@@ -688,8 +688,8 @@ static int pcrf_rx_str_cb( struct msg **msg, struct avp *avp,
         ogs_error("no_Termination-Cause");
     }
 
-    if (sess_data->state != SESSION_ABORTED) {
-        /* Send Re-Auth Request if Abort-Session-Request is not initaited */
+/*    if (sess_data->state != SESSION_ABORTED) {
+         Send Re-Auth Request if Abort-Session-Request is not initaited 
         rv = pcrf_gx_send_rar(
                 sess_data->gx_sid, sess_data->rx_sid, &rx_message);
         if (rv != OGS_OK) {
@@ -700,7 +700,7 @@ static int pcrf_rx_str_cb( struct msg **msg, struct avp *avp,
             }
         }
     }
-
+*/
     /* Set the Origin-Host, Origin-Realm, andResult-Code AVPs */
     ret = fd_msg_rescode_set(ans, (char *)"DIAMETER_SUCCESS", NULL, NULL, 1);
     ogs_assert(ret == 0);

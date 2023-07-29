@@ -896,9 +896,10 @@ static int hss_ogs_diam_cx_lir_cb( struct msg **msg, struct avp *avp,
     /* Get Server-Name by IMPU(Public-Identity) */
     server_name = hss_cx_get_server_name(public_identity);
     if (!server_name) {
-        ogs_error("No Server-Name in Public-Identity[%s]", public_identity);
-        result_code = OGS_DIAM_CX_SERVER_NAME_NOT_STORED;
-        goto out;
+            server_name="sip:outgoing.ims.mnc001.mcc001.3gppnetwork.org:5060";
+       // ogs_error("No Server-Name in Public-Identity[%s]", public_identity);
+       // result_code = OGS_DIAM_CX_SERVER_NAME_NOT_STORED;
+       // goto out;
     }
 
     /* Set Vendor-Specific-Application-Id AVP */
